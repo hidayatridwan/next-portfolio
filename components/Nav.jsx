@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { motion } from "framer-motion";
 
 const links = [
   { path: "/", name: "home" },
@@ -9,7 +10,7 @@ const links = [
   { path: "/contact", name: "contact" },
 ];
 
-const Nav = ({ containerStyles, linkStyles, underLinkStyles }) => {
+const Nav = ({ containerStyles, linkStyles, underLineStyles }) => {
   const path = usePathname();
 
   return (
@@ -20,6 +21,15 @@ const Nav = ({ containerStyles, linkStyles, underLinkStyles }) => {
           className={`capitalize ${linkStyles}`}
           key={link.name}
         >
+          {link.path === path && (
+            <motion.span
+              className={`${underLineStyles}`}
+              layoutId="underline"
+              initial={{ y: "-100%" }}
+              animate={{ y: 0 }}
+              transition={{ type: "twean" }}
+            />
+          )}
           {link.name}
         </Link>
       ))}
